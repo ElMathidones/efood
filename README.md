@@ -1,16 +1,36 @@
-# React + Vite
+# 🍔 efood
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação web de delivery de comida desenvolvida com React, simulando um fluxo real de pedidos com carrinho, checkout e listagem de restaurantes.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* React
+* Vite
+* Styled Components
+* React Router
 
-## React Compiler
+## 📦 Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Listagem de restaurantes
+* Visualização de cardápio
+* Adição e remoção de itens no carrinho
+* Checkout com validação
+* Persistência do carrinho (localStorage)
 
-## Expanding the ESLint configuration
+## 🌐 Deploy
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Acesse o projeto online:
+https://efood-rust-zeta.vercel.app/
+
+## ⚙️ Como rodar localmente
+
+```bash
+git clone https://github.com/ElMathidones/efood.git
+cd efood
+npm install
+npm run dev
+```
+
+## 📌 Observações
+
+Este projeto foi desenvolvido como atividade prática, focando em boas práticas de React, componentização e experiência do usuário.
