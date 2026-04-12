@@ -1,6 +1,13 @@
 import styled from 'styled-components'
 
+export const PageWrapper = styled.div`
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+`
+
 export const Wrapper = styled.section`
+    flex: 1;
     padding: 56px 16px 0;
 
     h1 {

@@ -6,16 +6,16 @@ import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import Modal from '../../components/Modal'
 import ProductCard from '../../components/ProductCard'
-import restaurants from '../../data/restaurants'
+import { fetchRestaurants } from '../../services/api'
+import { mapRestaurant } from '../../services/mappers'
 import * as S from './styles'
 
 function Profile() {
     const { id } = useParams()
 
-    const restaurant = useMemo(
-        () => restaurants.find((item) => item.id === Number(id)),
-        [id]
-    )
+    const [restaurants, setRestaurants] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+    const [hasError, setHasError] = useState(false)
 
     const [selectedProduct, setSelectedProduct] = useState(null)
     const [cartItems, setCartItems] = useState(() => {
@@ -28,9 +28,30 @@ function Profile() {
         localStorage.setItem('efood_cart', JSON.stringify(cartItems))
     }, [cartItems])
 
-    if (!restaurant) {
-        return <h1>Restaurante não encontrado</h1>
-    }
+    useEffect(() => {
+        async function loadRestaurants() {
+        try {
+            setIsLoading(true)
+            setHasError(false)
+
+            const data = await fetchRestaurants()
+            const normalized = data.map(mapRestaurant)
+            setRestaurants(normalized)
+        } catch (error) {
+            console.error(error)
+            setHasError(true)
+        } finally {
+            setIsLoading(false)
+        }
+        }
+
+        loadRestaurants()
+    }, [])
+
+    const restaurant = useMemo(
+        () => restaurants.find((item) => item.id === Number(id)),
+        [restaurants, id]
+    )
 
     const addToCart = (product) => {
         setCartItems((prev) => {
@@ -76,6 +97,18 @@ function Profile() {
     const clearCart = () => {
         setCartItems([])
         localStorage.removeItem('efood_cart')
+    }
+
+    if (isLoading) {
+        return <h1 style={{ padding: '24px' }}>Carregando restaurante...</h1>
+    }
+
+    if (hasError) {
+        return <h1 style={{ padding: '24px' }}>Erro ao carregar restaurante.</h1>
+    }
+
+    if (!restaurant) {
+        return <h1 style={{ padding: '24px' }}>Restaurante não encontrado</h1>
     }
 
     return (

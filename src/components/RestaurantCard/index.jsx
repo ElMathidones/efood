@@ -20,7 +20,7 @@ function RestaurantCard({ restaurant }) {
 
       <S.Badges>
         <small>{restaurant.category}</small>
-        {restaurant.rating >= 4.8 && <small>Destaque da semana</small>}
+        {restaurant.highlighted && <small>Destaque da semana</small>}
       </S.Badges>
 
       <S.Content>

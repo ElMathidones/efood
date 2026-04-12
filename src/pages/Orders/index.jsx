@@ -28,59 +28,63 @@ function formatPrice(value) {
     const orders = JSON.parse(localStorage.getItem('efood_orders') || '[]')
 
     return (
-        <>
+    <S.PageWrapper>
         <Header />
-        <S.Wrapper className="container">
-            <h1>Meus pedidos</h1>
 
-            {orders.length === 0 ? (
+        <S.Wrapper className="container">
+        <h1>Meus pedidos</h1>
+
+        {orders.length === 0 ? (
             <S.Empty>Nenhum pedido foi realizado ainda.</S.Empty>
-            ) : (
+        ) : (
             <S.List>
-                {orders
+            {orders
                 .slice()
                 .reverse()
                 .map((order) => (
-                    <S.Card key={order.orderNumber}>
+                <S.Card key={order.orderNumber}>
                     <S.TopRow>
-                        <div>
+                    <div>
                         <h2>Pedido #{order.orderNumber}</h2>
                         <span>{formatDate(order.createdAt)}</span>
-                        </div>
-                        <strong>{formatPrice(order.total)}</strong>
+                    </div>
+                    <strong>{formatPrice(order.total)}</strong>
                     </S.TopRow>
 
                     <S.Items>
-                        {order.items.map((item) => (
+                    {order.items.map((item) => (
                         <li key={`${order.orderNumber}-${item.id}`}>
-                            <span>
+                        <span>
                             {item.quantity}x {item.name}
-                            </span>
-                            <span>{formatPrice(item.price * item.quantity)}</span>
+                        </span>
+                        <span>
+                            {formatPrice(item.price * item.quantity)}
+                        </span>
                         </li>
-                        ))}
+                    ))}
                     </S.Items>
 
                     <S.Address>
-                        <h3>Entrega</h3>
-                        <p>
+                    <h3>Entrega</h3>
+                    <p>
                         {order.delivery.receiver} — {order.delivery.address},{' '}
                         {order.delivery.number}
                         {order.delivery.complement
-                            ? `, ${order.delivery.complement}`
-                            : ''}
-                        </p>
-                        <p>
+                        ? `, ${order.delivery.complement}`
+                        : ''}
+                    </p>
+                    <p>
                         {order.delivery.city} — CEP {order.delivery.zipCode}
-                        </p>
+                    </p>
                     </S.Address>
-                    </S.Card>
+                </S.Card>
                 ))}
             </S.List>
-            )}
+        )}
         </S.Wrapper>
+
         <Footer />
-        </>
+    </S.PageWrapper>
     )}
 
 export default Orders
