@@ -12,22 +12,22 @@ function RestaurantCard({ restaurant }) {
         loading="lazy"
         decoding="async"
         width="472"
-        height="220"
+        height="217"
         onError={(e) => {
           e.currentTarget.src = FALLBACK
         }}
       />
+
+      <S.Badges>
+        <small>{restaurant.category}</small>
+        {restaurant.rating >= 4.8 && <small>Destaque da semana</small>}
+      </S.Badges>
 
       <S.Content>
         <S.TitleRow>
           <h3>{restaurant.title}</h3>
           <span>{restaurant.rating} ⭐</span>
         </S.TitleRow>
-
-        <S.Badges>
-          <small>{restaurant.category}</small>
-          {restaurant.rating >= 4.8 && <small>Destaque da semana</small>}
-        </S.Badges>
 
         <p>{restaurant.description}</p>
         <Link to={`/perfil/${restaurant.id}`}>Saiba mais</Link>

@@ -8,12 +8,8 @@ const GlobalStyles = createGlobalStyle`
     font-family: Roboto, Arial, sans-serif;
     }
 
-    html {
-        scroll-behavior: smooth;
-    }
-
     body {
-        background: linear-gradient(180deg, #fff8f2 0%, #fff1e6 100%);
+        background-color: #fff8f2;
         color: #4b4b4b;
     }
 
@@ -25,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
     button {
         border: none;
         cursor: pointer;
+        font-family: inherit;
     }
 
     img {
@@ -38,6 +35,7 @@ const GlobalStyles = createGlobalStyle`
 
     input {
         outline: none;
+        font-family: inherit;
     }
 
     .container {

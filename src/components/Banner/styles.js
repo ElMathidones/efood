@@ -1,39 +1,31 @@
 import styled from 'styled-components'
 
 export const HomeBanner = styled.section`
-    background-color: #fff1e6;
+    background-color: #fff8f2;
     background-image: url('/assets/pattern-utensils.svg');
     background-repeat: repeat;
-    padding: 96px 16px;
+    padding: 64px 0 80px;
     text-align: center;
 
     h2 {
-        max-width: 620px;
+        max-width: 540px;
         margin: 0 auto;
         color: #e66767;
-        font-size: 48px;
+        font-size: 36px;
         font-weight: 900;
-        line-height: 1.25;
-    }
-
-    @media (max-width: 768px) {
-        padding: 72px 16px;
-
-        h2 {
-        font-size: 34px;
-        }
+        line-height: 1.35;
     }
 `
 
 export const ProfileBanner = styled.section`
-    height: 320px;
+    height: 280px;
     background-size: cover;
     background-position: center;
 
     .overlay {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.6));
+        background-color: rgba(0, 0, 0, 0.5);
         height: 100%;
-        padding: 24px 16px;
+        padding: 24px 0 32px;
     }
 
     .container {
@@ -49,20 +41,12 @@ export const ProfileBanner = styled.section`
     }
 
     span {
-        font-size: 24px;
-        font-weight: 300;
+        font-size: 32px;
+        font-weight: 100;
     }
 
     h2 {
-        font-size: 38px;
+        font-size: 32px;
         font-weight: 900;
-    }
-
-    @media (max-width: 768px) {
-        height: 260px;
-
-        h2 {
-        font-size: 28px;
-        }
     }
 `

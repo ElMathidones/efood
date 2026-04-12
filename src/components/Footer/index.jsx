@@ -4,12 +4,20 @@ function Footer() {
     return (
         <S.Wrapper>
         <div className="container">
-            <S.Logo>efood</S.Logo>
+            <img src="/assets/logo-efood.svg" alt="efood" />
+
             <S.Icons>
-            <span>○</span>
-            <span>○</span>
-            <span>○</span>
+            <a href="#" aria-label="Instagram">
+                <img src="/assets/instagram.svg" alt="Instagram" />
+            </a>
+            <a href="#" aria-label="Facebook">
+                <img src="/assets/facebook.svg" alt="Facebook" />
+            </a>
+            <a href="#" aria-label="Twitter">
+                <img src="/assets/twitter.svg" alt="Twitter" />
+            </a>
             </S.Icons>
+
             <p>
             A efood é uma plataforma para divulgação de estabelecimentos. A
             responsabilidade pela entrega e pela qualidade dos produtos é do

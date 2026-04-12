@@ -29,29 +29,37 @@ function CartSvg() {
                 <Link to="/pedidos">Meus pedidos</Link>
                 </S.LeftGroup>
 
+                <S.CenterGroup>
                 <S.Logo to="/">
-                <img src="/assets/logo-efood.svg" alt="efood" />
+                    <img src="/assets/logo-efood.svg" alt="efood" />
                 </S.Logo>
+                </S.CenterGroup>
 
+                <S.RightGroup>
                 <S.CartIconButton type="button" onClick={onOpenCart}>
-                <CartSvg />
-                {cartCount > 0 && <S.CartBadge>{cartCount}</S.CartBadge>}
+                    <CartSvg />
+                    {cartCount > 0 && <S.CartBadge>{cartCount}</S.CartBadge>}
                 </S.CartIconButton>
+                </S.RightGroup>
             </S.ProfileBar>
             ) : (
             <S.HomeBar>
-                <S.Logo to="/">
-                <img src="/assets/logo-efood.svg" alt="efood" />
-                </S.Logo>
+                <S.LeftSpacer />
 
-                <S.HomeActions>
+                <S.CenterLogo>
+                <S.Logo to="/">
+                    <img src="/assets/logo-efood.svg" alt="efood" />
+                </S.Logo>
+                </S.CenterLogo>
+
+                <S.RightActions>
                 <Link to="/pedidos">Meus pedidos</Link>
 
                 <S.CartIconButton type="button" onClick={onOpenCart}>
                     <CartSvg />
                     {cartCount > 0 && <S.CartBadge>{cartCount}</S.CartBadge>}
                 </S.CartIconButton>
-                </S.HomeActions>
+                </S.RightActions>
             </S.HomeBar>
             )}
         </div>
