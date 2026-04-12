@@ -20,7 +20,7 @@ Aplicação web de delivery de comida desenvolvida com React, simulando um fluxo
 ## 🌐 Deploy
 
 Acesse o projeto online:
-https://efood-rust-zeta.vercel.app/
+https://efood-figma.vercel.app/
 
 ## ⚙️ Como rodar localmente
 
