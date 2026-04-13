@@ -1,7 +1,15 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+    clearCart,
+    closeCart,
+    decreaseQuantity,
+    increaseQuantity,
+    removeItem
+    } from '../../store/reducers/cart'
 import * as S from './styles'
 
-function formatPrice(value) {
+    function formatPrice(value) {
     return value.toLocaleString('pt-BR', {
         style: 'currency',
         currency: 'BRL'
@@ -33,9 +41,13 @@ function formatPrice(value) {
 
     if (type === 'month') {
         const month = numbers.slice(0, 2)
+
         if (month.length === 1) return month
+
         const numberMonth = Number(month)
+
         if (numberMonth > 12) return '12'
+
         return month
     }
 
@@ -46,15 +58,10 @@ function formatPrice(value) {
     return value
     }
 
-    function Cart({
-    isOpen,
-    items,
-    onClose,
-    onRemoveItem,
-    onIncreaseQuantity,
-    onDecreaseQuantity,
-    onClearCart
-    }) {
+    function Cart() {
+    const dispatch = useDispatch()
+    const { items, isOpen } = useSelector((state) => state.cart)
+
     const [step, setStep] = useState('cart')
     const [errors, setErrors] = useState({})
     const [isProcessing, setIsProcessing] = useState(false)
@@ -90,11 +97,15 @@ function formatPrice(value) {
         }
     }, [isOpen])
 
-    const closeAndReset = () => {
+    const resetStates = () => {
         setStep('cart')
         setErrors({})
         setIsProcessing(false)
-        onClose()
+    }
+
+    const closeAndReset = () => {
+        resetStates()
+        dispatch(closeCart())
     }
 
     const validateDelivery = () => {
@@ -188,8 +199,8 @@ function formatPrice(value) {
         JSON.stringify([...currentOrders, newOrder])
         )
 
-        onClearCart()
-        setStep('cart')
+        dispatch(clearCart())
+        resetStates()
         setDeliveryData({
         receiver: '',
         address: '',
@@ -205,9 +216,7 @@ function formatPrice(value) {
         expiresMonth: '',
         expiresYear: ''
         })
-        setErrors({})
-        setIsProcessing(false)
-        onClose()
+        dispatch(closeCart())
     }
 
     if (!isOpen) return null
@@ -228,17 +237,26 @@ function formatPrice(value) {
                         <span>{formatPrice(item.price)}</span>
 
                         <S.QuantityRow>
-                            <button type="button" onClick={() => onDecreaseQuantity(item.id)}>
+                            <button
+                            type="button"
+                            onClick={() => dispatch(decreaseQuantity(item.id))}
+                            >
                             -
                             </button>
                             <strong>{item.quantity}</strong>
-                            <button type="button" onClick={() => onIncreaseQuantity(item.id)}>
+                            <button
+                            type="button"
+                            onClick={() => dispatch(increaseQuantity(item.id))}
+                            >
                             +
                             </button>
                         </S.QuantityRow>
                         </div>
 
-                        <S.DeleteButton type="button" onClick={() => onRemoveItem(item.id)}>
+                        <S.DeleteButton
+                        type="button"
+                        onClick={() => dispatch(removeItem(item.id))}
+                        >
                         🗑
                         </S.DeleteButton>
                     </S.Item>
