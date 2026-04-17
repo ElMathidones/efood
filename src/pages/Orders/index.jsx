@@ -10,26 +10,26 @@ function formatPrice(value) {
         style: 'currency',
         currency: 'BRL'
     })
-    }
+}
 
-    function formatDate(dateString) {
+function formatDate(dateString) {
     const date = new Date(dateString)
 
     return (
         date.toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
         }) +
         ' às ' +
         date.toLocaleTimeString('pt-BR', {
-        hour: '2-digit',
-        minute: '2-digit'
+            hour: '2-digit',
+            minute: '2-digit'
         })
     )
-    }
+}
 
-    function Orders() {
+function Orders() {
     const dispatch = useDispatch()
     const { items } = useSelector((state) => state.cart)
     const orders = JSON.parse(localStorage.getItem('efood_orders') || '[]')
@@ -37,64 +37,66 @@ function formatPrice(value) {
 
     return (
         <S.PageWrapper>
-        <Header
-            cartCount={totalItems}
-            onOpenCart={() => dispatch(openCart())}
-        />
+            <Header
+                isProfile
+                cartCount={totalItems}
+                onOpenCart={() => dispatch(openCart())}
+            />
 
-        <S.Wrapper className="container">
-            <h1>Meus pedidos</h1>
+            <S.Wrapper className="container">
+                <h1>Meus pedidos</h1>
 
-            {orders.length === 0 ? (
-            <S.Empty>Nenhum pedido foi realizado ainda.</S.Empty>
-            ) : (
-            <S.List>
-                {orders
-                .slice()
-                .reverse()
-                .map((order) => (
-                    <S.Card key={order.orderNumber}>
-                    <S.TopRow>
-                        <div>
-                        <h2>Pedido #{order.orderNumber}</h2>
-                        <span>{formatDate(order.createdAt)}</span>
-                        </div>
-                        <strong>{formatPrice(order.total)}</strong>
-                    </S.TopRow>
+                {orders.length === 0 ? (
+                    <S.Empty>Nenhum pedido foi realizado ainda.</S.Empty>
+                ) : (
+                    <S.List>
+                        {orders
+                            .slice()
+                            .reverse()
+                            .map((order, index) => (
+                                <S.Card key={`${order.createdAt}-${index}`}>
+                                    <S.TopRow>
+                                        <div>
+                                            <h2>Pedido #{order.apiOrderId ?? order.orderNumber}</h2>
+                                            <span>{formatDate(order.createdAt)}</span>
+                                        </div>
+                                        <strong>{formatPrice(order.total)}</strong>
+                                    </S.TopRow>
 
-                    <S.Items>
-                        {order.items.map((item) => (
-                        <li key={`${order.orderNumber}-${item.id}`}>
-                            <span>
-                            {item.quantity}x {item.name}
-                            </span>
-                            <span>{formatPrice(item.price * item.quantity)}</span>
-                        </li>
-                        ))}
-                    </S.Items>
+                                    <S.Items>
+                                        {order.items.map((item) => (
+                                            <li key={`${order.createdAt}-${item.id}`}>
+                                                <span>
+                                                    {item.quantity}x {item.name}
+                                                </span>
+                                                <span>{formatPrice(item.price * item.quantity)}</span>
+                                            </li>
+                                        ))}
+                                    </S.Items>
 
-                    <S.Address>
-                        <h3>Entrega</h3>
-                        <p>
-                        {order.delivery.receiver} — {order.delivery.address},{' '}
-                        {order.delivery.number}
-                        {order.delivery.complement
-                            ? `, ${order.delivery.complement}`
-                            : ''}
-                        </p>
-                        <p>
-                        {order.delivery.city} — CEP {order.delivery.zipCode}
-                        </p>
-                    </S.Address>
-                    </S.Card>
-                ))}
-            </S.List>
-            )}
-        </S.Wrapper>
+                                    <S.Address>
+                                        <h3>Entrega</h3>
+                                        <p>
+                                            {order.delivery.receiver} — {order.delivery.address},{' '}
+                                            {order.delivery.number}
+                                            {order.delivery.complement
+                                                ? `, ${order.delivery.complement}`
+                                                : ''}
+                                        </p>
+                                        <p>
+                                            {order.delivery.city} — CEP {order.delivery.zipCode}
+                                        </p>
+                                    </S.Address>
+                                </S.Card>
+                            ))}
+                    </S.List>
+                )}
+            </S.Wrapper>
 
-        <Cart />
-        <Footer />
+            <Cart />
+            <Footer />
         </S.PageWrapper>
-    )}
+    )
+}
 
 export default Orders

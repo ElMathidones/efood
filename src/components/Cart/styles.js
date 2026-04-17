@@ -12,10 +12,15 @@ export const Sidebar = styled.aside`
     top: 0;
     right: 0;
     width: 360px;
+    max-width: 100%;
     min-height: 100vh;
     background-color: #e66767;
-    padding: 32px 8px 0;
+    padding: 32px 8px 16px;
     color: #ffebd9;
+
+    @media (max-width: 480px) {
+        width: 100%;
+    }
 `
 
 export const Items = styled.div`
@@ -158,4 +163,13 @@ export const Text = styled.p`
 export const ErrorText = styled.small`
     color: #fff1f1;
     font-size: 12px;
+`
+
+export const ApiError = styled.p`
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 8px;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-bottom: 16px;
 `
